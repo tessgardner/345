@@ -1,0 +1,73 @@
+Program started. PID: 5505
+Handler for signal 10 set up.
+Handler for signal 12 set up.
+Handler for signal 2 set up.
+Handler for signal 15 set up.
+Waiting for signals ...
+^C
+Signal received: 2 (Interrupt)
+Signal 10 is now unblocked.
+SIGINT received: Unblocking SIGUSR1
+
+Signal received: 10 (User defined signal 1)
+### Status Report ###
+Current time: Tue Mar 25 13:34:24 2025
+
+Uptime: 1742927664 seconds
+### End of Report ###
+^C
+Signal received: 2 (Interrupt)
+Signal 10 is now blocked.
+SIGINT received: Blocking SIGUSR1
+
+Signal received: 10 (User defined signal 1)
+^C
+Signal received: 2 (Interrupt)
+Signal 10 is now unblocked.
+SIGINT received: Unblocking SIGUSR1
+
+Signal received: 10 (User defined signal 1)
+### Status Report ###
+Current time: Tue Mar 25 13:34:55 2025
+
+Uptime: 1742927695 seconds
+### End of Report ###
+
+Signal received: 12 (User defined signal 2)
+
+### Running Signal Test Cases ###
+
+Attempting test case #1...
+Signal received: 10 (User defined signal 1)
+### Status Report ###
+Current time: Tue Mar 25 13:35:08 2025
+
+Uptime: 1742927708 seconds
+### End of Report ###
+SIGUSR1 sent successfully.
+
+Attempting test case #2...
+Signal received: 2 (Interrupt)
+Signal 10 is now blocked.
+SIGINT received: Blocking SIGUSR1
+SIGINT sent successfully.
+
+Attempting test case #3...Blocking SIGUSR1...
+Signal 10 is now blocked.
+Sending SIGUSR1...SIGUSR1 sent successfully.
+Unblocking SIGUSR1...
+Signal received: 10 (User defined signal 1)
+Signal 10 is now unblocked.
+
+Sending SIGUSR1 again...
+Signal received: 10 (User defined signal 1)
+SIGUSR1 sent successfully.
+
+### Signal Test Cases Completed ###
+^C
+Signal received: 2 (Interrupt)
+Signal 10 is now unblocked.
+SIGINT received: Unblocking SIGUSR1
+
+Signal received: 15 (Terminated)
+SIGTERM received: Exiting the program.
