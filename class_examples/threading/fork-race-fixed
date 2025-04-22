@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <fcntl.h>
+
+int main() {
+	char c;
+	pid_t pid; 
+
+	int fd = open("test.txt", O_RDWR);
+	if (fd == -1) {
+		perror("error opening the file");
+	}
+
+	if (read(fd, &c, 1) != 1) {
+		perror("error reading that file");
+		close(fd);
+		exit(1);
+	}
+	printf("before the fork: %c\n", c);
+
+	pid = fork();
+	if (pid == -1) {
+		perror("error forking process");
+		close(fd);
+		exit(1);
+	}
+
+	if (pid == 0) { // child
+		int child_fd = open("test.txt", O_RDWR);
+		if (child_fd == -1) {
+			perror("Child error opening the file");
+			exit(1);
+		}
+
+		// move to the second character
+		if (lseek(child_fd, 1, SEEK_SET) == -1) {
+			perror("child lseek error");
+			close(child_fd);
+			exit(1);
+		}
+
+		if (read(child_fd, &c, 1) == 1) {
+			printf("Child read: %c\n", c);
+		} else {
+			perror("child read error");
+		}
+
+		close(child_fd);
+	} else { // parent
+		if (lseek(fd, 1, SEEK_SET) == -1) {
+			perror("parent lseek error");
+			close(fd);
+			exit(1);
+		}
+
+		//read the character
+		if (read(fd, &c, 1) == 1) {
+			printf("Parent read: %c\n", c);
+		} else {
+			perror("pareent read error");
+		}
+		
+		close(fd);
+	}
+	return 0;
+}
